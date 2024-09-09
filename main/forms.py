@@ -26,3 +26,19 @@ class RegisterForm(UserCreationForm):
 class LoginForm(AuthenticationForm):
     username = UsernameField(label='Enter Username', widget=forms.TextInput(attrs={'class':'form-control'}))
     password = forms.CharField(label='Enter Password', widget=forms.PasswordInput(attrs={'class':'form-control'}))
+	
+
+class points_form(forms.Form):
+	points = forms.CharField(widget=forms.TextInput(attrs={'readonly': 'readonly'}))
+	
+class address_form(forms.Form):
+	email = forms.CharField()
+	first = forms.CharField()
+	last = forms.CharField()
+	address = forms.CharField()
+	
+	
+	
+	
+	
+	
