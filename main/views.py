@@ -65,7 +65,7 @@ def action(request):
             
             clean_address = urllib.parse.quote(address, safe='/', encoding=None, errors=None)
             
-            call = requests.get(f"https://www.googleapis.com/civicinfo/v2/representatives?key=AIzaSyDxGsCeJRDMAgqfTVJBpnHpVQ-vE_7K1cI&address={clean_address}")
+            call = requests.get(f"https://www.googleapis.com/civicinfo/v2/representatives?key= secret :3 &address={clean_address}")
             response = call.json()
             divisions = response['divisions']
             lis = list(divisions.values())
@@ -94,8 +94,8 @@ def action(request):
             for member, email in context.items():
                 email = f"Dear {member}, TESTING TESTING. Thankys! {last_name},{first_name}"      
                  
-                yag = yagmail.SMTP('johnstoncolin394@gmail.com', 'fntp cisu fwwd wwbr')
-                yag.send('crystallovesyou04@gmail.com','Constituent concerned over PFAS chemicals polluting our water.', email)
+                yag = yagmail.SMTP(' secret :3 ', ' secret :3 ')
+                yag.send(' secret :3 ','Constituent concerned over PFAS chemicals polluting our water.', email)
             return render(request, 'action.html', context=context)
     form = address_form()
     return render(request, 'action.html', {'form': form})
@@ -147,9 +147,9 @@ def add_points(request):
                     
                 
             
-        print('sucess')
+        print('success')
         return HttpResponse(i, content_type="application/json")
     
-    return Response({'status': 'error', 'message': 'User not found'}, status=404)
+    return HttpResponse({'status': 'error', 'message': 'User not found'}, status=404)
 
 
