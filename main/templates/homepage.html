@@ -1,0 +1,88 @@
+﻿
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link id="sheet-theme" rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <script>
+        
+    </script>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    {% load django_bootstrap5 %}
+    {% bootstrap_css %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0-11/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg fixed-top navbar-light bg-custom" style="background-color:#338918">
+        
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+
+        </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <h4><a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a></h4>
+                    </li>
+                    <li class="nav-item">
+                        <h4><a class="nav-link" href='/maps'>Maps</a></h4>
+                    </li>
+                    <li class="nav-item">
+                        <h4><a class="nav-link" href='/games'>Games</a></h4>
+                    </li>
+                    <li class="nav-item">
+                        <h4><a class="nav-link" href='/action'>Take Action</a></h4>
+                    </li>
+
+                </ul>
+
+            </div>
+
+</nav>
+    <div id="image"></div>
+    <div class="bg-text" style="position: absolute; top: 15%">
+        <div>
+            <h2>Our Mission</h2><br /><h4>Insert random bullshit here dsfjscfjdfksdjfcjsdfskjfjsdhljskdhfjksdhfksdfhskdfhsdkjfhsdjksfhdulk</h4>
+            <span style="text-align: center"></span>
+        </div>
+        
+        
+
+    </div>
+    <br /><br /><br /><br />
+    <div style="text-align: center; font-family: serif width: 100%">
+        <span style="font-family: serif;"><h1 style="font-size: 75px">What are PFAS?</h1><br /><h3>(And why should I care?)</h3></span><br><br>
+                                                                             <div id="takeaways">
+                                                                                 <h3>Summary</h3><ol>
+                                                                                     <li>PFAS are chemicals that take a long time or never break down in the environment.</li>
+                                                                                     <li>PFAS pose various health risks including: reproductive and delevelopmental issues in children of effected; weakening of immune system; thyroid disease; and cancer.</li>
+                                                                                     <li>There are thousands of types of PFAS, each break down in a different difficult way.</li>
+                                                                                 </ol><br /><br /><br />
+                                                                                 <img id="waterimg" src="https://github.com/ColinJ69/NoNameYet/raw/main/waterimg.jpg" />
+                                                                             </div>
+        
+    </div>
+    <div id="article">
+        <h1>The EPA Follows Through On Its Promise</h1><h4>
+
+            In 2021, the EPA announced a road map detailing how the agency would begin to limit levels of PFAS in the environment.1 The agency set health advisory limits for PFAS but had no power to enforce those limits.
+            At the time, health and environmental advocates expressed frustration with the agency for not taking more decisive action to crack down on toxic contamination.
+
+            “It’s the EPA’s job to regulate chemicals to set safe drinking water standards and to hold polluters accountable,” said Stanton, whose son was diagnosed with cancer that was potentially linked to PFAS exposure. “Today, the EPA did their job.”
+
+            The EPA estimates that 6% to 10% of the 66,000 public drinking water systems will need to make changes to be in compliance.2
+
+            Only 11 U.S. states have enforceable standards for safe drinking water.
+
+            Enforcing maximum contaminant levels at a national level means that states no longer have to restrict PFAS with a “patchwork of policies,” said Pennsylvania State Senator Carolyn Comitta.
+        </h4>
+    </div>
+
+</body>
+</html>

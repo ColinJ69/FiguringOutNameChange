@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+{% load static %}
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Cum</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    {% load django_bootstrap5 %}
+    {% bootstrap_css %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0-11/css/all.min.css">
+    <script>
+       function toggle() {
+            var div = document.getElementById("informDiv");
+            if (div.style.display === "none") {
+                div.style.display = "block";
+            } else {
+                div.style.display = "none";
+            }
+        };
+    </script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg fixed-top navbar-light bg-custom" style="background-color:#338918">
+        <!--<img src="https://github.com/ColinJ69/Farmers_Friend/raw/main/logo1.png" height="48" width="112" />-->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto" style="color: white">
+                <li class="nav-item active">
+                    <h4><a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a></h4>
+                </li>
+                <li class="nav-item">
+                    <h4><a class="nav-link" href='/maps'>Maps</a></h4>
+                </li>
+                <li class="nav-item">
+                    <h4><a class="nav-link" href='/games'>Games</a></h4>
+                </li>
+                <li class="nav-item">
+                    <h4><a class="nav-link" href='/action'>Take Action</a></h4>
+                </li>
+
+            </ul>
+
+        </div>
+
+    </nav><br /><br /><br /><br />
+    <span style="height:100px; float: left; width:100%;">
+        <h3>Predicted spread of PFAS across NC water systems</h3><button onclick="toggle()" id="showButton">Info</button>
+
+    </span>
+    
+    <div><div style="font-family: serif; border-width: 2px; border-color: black; padding: 5px" id="informDiv"><h2 style="font-size: 32px">Info about map</h2><br /><br /><h5 >These 130 locations across North Carolina effect a total population of about 6 million people, of which machine learning(ML) models have predicted that 4 million of those people are exposed to 1-6 of the tested PFAS and/or GenX chemicals at dangerous thresholds.</h5><a  class="x" onclick="toggle()"></a><div><br /><br /><br /><br /><br /><h3>How the ML model was trained</h3><br /><h5>I first selected a training and testing set from the<a href="ncpfastnetwork.com"> NC PFAS Network</a>, then using 12 features such as distance from potential industrial polluters, users of AFFF firefighting foam, and the depth of the well(if the source is a well). Using a 75/25 train-test split, the most accurate model was the light gradient boosting machine at 94.87% accuracy. </h5></div></div><iframe src="https://snazzymaps.com/embed/636654" style="height:700px; float: left;width: 100%"></iframe></div>
+    
+
+</body>
+</html>

@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+{% load static %}
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    {% load django_bootstrap5 %}
+    {% bootstrap_css %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0-11/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg fixed-top navbar-light bg-custom" style="background-color:#338918">
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <h4><a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a></h4>
+                </li>
+                <li class="nav-item">
+                    <h4><a class="nav-link" href='/maps'>Maps</a></h4>
+                </li>
+                <li class="nav-item">
+                    <h4><a class="nav-link" href='/games'>Games</a></h4>
+                </li>
+                <li class="nav-item">
+                    <h4><a class="nav-link" href='/action'>Take Action</a></h4>
+                </li>
+
+            </ul>
+
+        </div>
+
+    </nav><br /><br /><br />
+                      <div style="position: absolute; left: 30%; top: 30%; height: 470px; width: 700px; background-color: #C1C8E4; padding: 20px; border-radius: 15px">
+                          <form method="POST">
+                              {% csrf_token %}
+                              {{form.as_p}}
+                              <button style="color: white; background-color: #5AB9EA; width: 100%;  border-color: white;height: 50px; border-radius: 10px; font-size: 2rem;" type="submit">Submit</button>
+                          </form>
+                      </div>
+</body>
+</html>
