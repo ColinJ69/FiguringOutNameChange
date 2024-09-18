@@ -60,7 +60,7 @@ def action(request):
             
             clean_address = urllib.parse.quote(address, safe='/', encoding=None, errors=None)
             
-            call = requests.get(f"https://www.googleapis.com/civicinfo/v2/representatives?key=AIzaSyDxGsCeJRDMAgqfTVJBpnHpVQ-vE_7K1cI&address={clean_address}")
+            call = requests.get(f"https://www.googleapis.com/civicinfo/v2/representatives?key=secret&address={clean_address}")
             response = call.json()
             divisions = response['divisions']
             lis = list(divisions.values())
@@ -95,8 +95,8 @@ def action(request):
             
                    
                  
-                yag = yagmail.SMTP('johnstoncolin394@gmail.com', 'fntp cisu fwwd wwbr')
-                yag.send('crystallovesyou04@gmail.com', 'Constituent concerned over pfas pollution', email_text)
+                yag = yagmail.SMTP('secret', 'secret')
+                yag.send('secret', 'Constituent concerned over pfas pollution', email_text)
             return render(request, 'action.html', {'submitted': True, 'house': house_member, 'senate': senate_member, 'congress': congress_member, 'link': c_link, 'email': i})
     form = email_form()
     return render(request, 'action.html', {'form': form})
