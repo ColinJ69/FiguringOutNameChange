@@ -1,0 +1,215 @@
+﻿
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>NC Water Watch</title>
+    <link id="sheet-theme" rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <script>
+
+    </script>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    {% load django_bootstrap5 %}
+    {% bootstrap_css %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0-11/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body style="background-color: #f7f7f7f7">
+    <nav role="navigation">
+        <div id="image"></div>
+        <div id="menuToggle">
+
+            <input type="checkbox" />
+
+
+            <span style="background: #ffffff;"></span>
+            <span style="background: #ffffff;"></span>
+            <span style="background: #ffffff;"></span>
+
+
+            <ul id="menu" style="background: #2F2F2F; color:white;">
+                <a href="/">
+                <li style="color:white">Home</li></a>
+                <a href="guides">
+                <li style="color:white">Guides</li></a>
+                <a href="maps">
+                <li style="color:white">Maps</li></a>
+                <a href="games">
+                <li style="color:white">Quizzes</li></a>
+                <a href="action">
+                <li style="color:white">Take action</li></a>
+                
+
+        </div>
+
+    </nav>
+    
+    <div style="text-align: center; background: linear-gradient(90deg, #000000, #3533cd); height: 200px ">
+        <h3 style="position: relative;top:20%; color: white; font-family:sans-serif; font-size: 2rem; padding:10px">"The PFAS contamination crisis is not just a threat—it’s an unfolding disaster that demands immediate and unprecedented action." - Scott Faber, EWG</h3>
+        <img style="position: absolute; bottom:8%; left:15%;" src="https://github.com/ColinJ69/NC-Water-Watch/raw/main/images/HydroHaven.svg" />
+    </div>
+
+
+
+
+
+    <div style="position: absolute; left:0px; top:85%; width: 100%; height: 300%">
+        <span style="display: inline-block; background-color: #CFDEE7; width: 100%; height: 30% ">
+            <h1 style=" position: relative; left: 14%; top: 30%; font-size: 4rem;">What are PFAS?</h1>
+            <a href="guides"><button style="position: relative; height: 75px; width: 200px; top:40%; left: 21.7%;font-size:1.6rem;">Learn more</button></a>
+            <div class="bg-text" style="position: absolute; top: 15%">
+
+                <h2></h2><hr style="background-color:white; border:2px solid;"><h3>PFAS are toxic chemicals commonly called 'forever chemicals' due to breaking down very slowly, and along with causing horrible health side effects, make them very dangerous for human health.</h3>
+                <span style="text-align: center"></span>
+            </div>
+        </span>
+        <span style="display: inline-block; height: 200px; width: 100%; background-color: #7A9E7E "></span>
+        <span style="display: inline-block; width: 100%; height: 30%; ">
+            <h1 style=" position: relative; left: 67%; top: 23%; font-size: 3.5rem;">Interactive maps</h1>
+            <a href="maps"><button style="position: relative; height: 75px; width: 200px; top: 30%; left: 74%; font-size: 1.6rem;">Explore</button></a>
+            <div class="box">
+
+
+            </div>
+
+        </span>
+
+        <span style="display: inline-block; width: 100%; height: 30%; ">
+            <h1 id="myElement" style=" position: relative; left: 9%; top: 20%; font-size: 4rem;">Quizzes</h1>
+            <a href="games"><button style="position: relative; height: 75px; width: 200px; top:30%; left: 10%;font-size:1.6rem;">Explore</button></a>
+
+
+            <h1 style ="position: relative; left: 70%; top: -16%;"id="response"></h1>
+            <h2 style="position: relative; left: 35.5%;top:-23%;">Question of the day</h2>
+            <div id="question_divy" style="position: relative;left:33%; top: -20%;">
+                <h3 id="question" style="position: relative; left: 0%; top: 35%;">What is the primary source of PFAS contamination in North Carolina’s water supply?</h3>
+                <form id="formA">
+                    <ol style="font-size: 25px; float: left">
+                        <li><input value="1" name="q" type="radio"><label id="1">Agricultural runoff</label></li>
+                        <li><input value="2" name="q" type="radio" /><label id="2">Industrial discharge</label></li>
+                        <li><input value="3" name="q" type="radio" /><label id="3">Residential wastewater</label></li>
+                        <li><input value="4" name="q" type="radio" /><label id="4">Natural sources</label></li>
+                    </ol>
+
+                </form>
+                <span>
+
+                </span>
+
+
+            </div>
+        </span>
+
+        <!--
+            <span style="display: inline-block; height: 200px; width: 100%; background-color: #AF9164"></span>
+            <span style="display: inline-block; width: 100%; height: 30%;">
+                <h1 style=" position: relative; left: 64%; top: 30%; font-size: 4rem;">Take action</h1>
+                <button style="position: relative; height: 75px; width: 200px; top: 40%; left: 68.7%; font-size: 1.6rem;">Explore</button>
+                <div id="leaderboardz" style="padding:40px;margin-top:-40px;">
+
+                    <h2 style="font-family: Book Antiqua">Make a meaningful change for you and members of your community. Make your opinion heard by lawmakers and regulators.</h2>
+                </div>
+            </span>
+    -->
+
+
+
+
+
+
+    </div>
+    <footer style="border:2px solid black"></footer>
+
+
+
+
+    <script>
+
+
+        function myFunction() {
+            var x = document.getElementById("myLinks");
+            if (x.style.display === "block") {
+                x.style.display = "none";
+            } else {
+                x.style.display = "block";
+            }
+        }
+        function onVisible(element, callback) {
+            new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.intersectionRatio > 0) {
+                        callback(element);
+                        observer.disconnect();
+                    }
+                });
+            }).observe(element);
+            if (!callback) return new Promise(r => callback = r);
+        }
+
+        onVisible(document.querySelector("#myElement"), () =>
+
+            fetch('/get_points')
+                .then(response => response.json())
+                .then(console.log(response))
+                .then(data => {
+                    countIni(JSON.stringify(data));
+                })
+
+
+
+        );
+
+
+
+        function countIni(num) {
+            let startNum = 0,
+                endNum = num,
+                nSecond = 2,
+                resolutionMS = 33,
+                deltaNum = (endNum - startNum) / (1000 / resolutionMS) / nSecond;
+            if (num === 0) {
+                document.querySelector('#response').textContent = 0;
+            }
+            var handle = setInterval(() => {
+
+                var x = startNum.toLocaleString(undefined, {
+                    minimumFractionDigits: 0,
+                    maximumFractionDigits: 0
+                });
+                document.querySelector('#response').textContent = `${x} points`;
+
+                // if already updated the endNum, stop
+                if (startNum >= endNum) clearInterval(handle);
+
+                startNum += deltaNum;
+                startNum = Math.min(startNum, endNum);
+            }, resolutionMS);
+        }
+
+
+        var radios = document.forms["formA"].elements["q"];
+
+
+        for (var i = 0, max = radios.length; i < max; i++) {
+            radios[i].onclick = function () {
+                var ans = document.getElementById(this.value);
+                console.log(this.value)
+                if (this.value == '2') {
+
+
+                    document.querySelector('#question_divy').innerHTML = '<h1>Correct</h1>';
+
+                } else {
+                    document.querySelector('#question_divy').innerHTML = '<h1>Incorrect</h1>';
+
+                }
+
+
+            }
+        }
+    </script>
+</body>
+</html>
