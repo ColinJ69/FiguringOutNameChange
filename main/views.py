@@ -76,7 +76,7 @@ def action(request):
             
             clean_address = urllib.parse.quote(address, safe='/', encoding=None, errors=None)
             
-            call = requests.get(f"https://www.googleapis.com/civicinfo/v2/representatives?key=AIzaSyDxGsCeJRDMAgqfTVJBpnHpVQ-vE_7K1cI&address={clean_address}")
+            call = requests.get(f"https://www.googleapis.com/civicinfo/v2/representatives?key=xxxxxxxxxxxxxxxxxx&address={clean_address}")
             response = call.json()
             divisions = response['divisions']
             lis = list(divisions.values())
@@ -103,7 +103,7 @@ def action(request):
             context = {house_member:email_house, senate_member: email_senate}
             i = f'Dear {congress_member}, I hope this letter finds you well. I am writing to express my concern regarding the presence of per- and polyfluoroalkyl substances (PFAS) in our local water systems. As a resident of your constituency, I am increasingly alarmed by the growing body of evidence highlighting the adverse health effects associated with PFAS exposure. PFAS, often referred to as forever chemicals, are persistent in the environment and have been linked to serious health issues, including cancer, liver damage, and immune system disruption. Recent studies have shown that PFAS contamination is widespread in North Carolina, affecting numerous communities and water sources. This is particularly troubling given the essential role that clean water plays in our daily lives and overall well-being. I urge you to take immediate and decisive action to address this pressing issue. So please, support legistlation backing PFAS clean ups, hold polluters accountable, and help raise public concern. Thank you, {first_name}, {last_name}'
                 
-            for member, email in context.items():
+            for member, emails in context.items():
                 email_text =f'Dear {member}, I hope this letter finds you well. I am writing to express my concern regarding the presence of per- and polyfluoroalkyl substances (PFAS) in our local water systems. As a resident of your constituency, I am increasingly alarmed by the growing body of evidence highlighting the adverse health effects associated with PFAS exposure. PFAS, often referred to as forever chemicals, are persistent in the environment and have been linked to serious health issues, including cancer, liver damage, and immune system disruption. Recent studies have shown that PFAS contamination is widespread in North Carolina, affecting numerous communities and water sources. This is particularly troubling given the essential role that clean water plays in our daily lives and overall well-being. I urge you to take immediate and decisive action to address this pressing issue. So please, support legistlation backing PFAS clean ups, hold polluters accountable, and help raise public concern. Thank you, {first_name}, {last_name}'
                 
 
@@ -111,8 +111,8 @@ def action(request):
             
                    
                  
-                yag = yagmail.SMTP('johnstoncolin394@gmail.com', 'fntp cisu fwwd wwbr')
-                yag.send('crystallovesyou04@gmail.com', 'Constituent concerned over pfas pollution', email_text)
+                yag = yagmail.SMTP(email, 'xxxxxxxxxxxxxx')
+                yag.send(emails, 'Constituent concerned over pfas pollution', email_text)
             return render(request, 'action.html', {'submitted': True, 'house': house_member, 'senate': senate_member, 'congress': congress_member, 'link': c_link, 'email': i})
     form = email_form()
     return render(request, 'action.html', {'form': form})
@@ -176,8 +176,7 @@ def synthesize(request):
                 models.points = (points - 500)
                 models.save()
     body_datas = request.data
-    #body_data = json.loads(body_unicode)
-    
+     
     add = body_datas['add']
     depth = body_datas['depth']
     
@@ -228,26 +227,22 @@ def logins(request):
         username = request.POST.get('username')
         password = request.POST.get('password')
         
-        # Check if a user with the provided username exists
+      
         if not User.objects.filter(username=username).exists():
-            # Display an error message if the username does not exist
+   
             messages.error(request, 'Invalid Username')
             return redirect('/logins')
         
-        # Authenticate the user with the provided username and password
+       
         user = authenticate(username=username, password=password)
         
         if user is None:
-            # Display an error message if authentication fails (invalid password)
+          
             messages.error(request, "Invalid Password")
             return redirect('/logins')
         else:
-            # Log in the user and redirect to the home page upon successful login
+
             login(request, user)
             return redirect('/')
-    
-    # Render the login page template (GET request)
-    return render(request, 'login.html', {'form':form})
 
-def art_helene(request):
-    return render(request, 'art_helene.html')
+    return render(request, 'login.html', {'form':form})
