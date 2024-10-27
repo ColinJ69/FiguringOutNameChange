@@ -256,15 +256,13 @@ body {
         top: -7px;
         left: -5px;
         cursor: pointer;
-        opacity: 0; /* hide this */
-        z-index: 2; /* and place it over the hamburger */
+        opacity: 0; 
+        z-index: 2; 
 
         -webkit-touch-callout: none;
     }
 
-    /*
- * Just a quick hamburger
- */
+  
     #menuToggle span {
         display: block;
         width: 33px;
@@ -286,35 +284,25 @@ body {
             transform-origin: 0% 100%;
         }
 
-    /* 
- * Transform all the slices of hamburger
- * into a crossmark.
- */
+ 
     #menuToggle input:checked ~ span {
         opacity: 1;
         transform: rotate(45deg) translate(-2px, -1px);
         background: white;
     }
 
-        /*
- * But let's hide the middle one.
- */
+
         #menuToggle input:checked ~ span:nth-last-child(3) {
             opacity: 0;
             transform: rotate(0deg) scale(0.2, 0.2);
         }
 
-        /*
- * Ohyeah and the last one should go the other direction
- */
+
         #menuToggle input:checked ~ span:nth-last-child(2) {
             transform: rotate(-45deg) translate(0, -1px);
         }
 
-/*
- * Make this absolute positioned
- * at the top left of the screen
- */
+
 #menu {
     position: absolute;
     width: 300px;
@@ -325,7 +313,7 @@ body {
     height: 1000px;
     list-style-type: none;
     -webkit-font-smoothing: antialiased;
-    /* to stop flickering of text in safari */
+  
 
     transform-origin: 0% 0%;
     transform: translate(-100%, 0);
@@ -337,9 +325,7 @@ body {
         font-size: 22px;
     }
 
-/*
- * And let's slide it in from the left
- */
+
 #menuToggle input:checked ~ ul {
     transform: none;
 }
@@ -348,12 +334,12 @@ body {
     position: relative;
 }
 
-    /* Hide the links inside the navigation menu (except for logo/home) */
+  
     .topnav #myLinks {
         display: none;
     }
 
-    /* Style navigation menu links */
+
     .topnav a {
         color: white;
         padding: 14px 16px;
@@ -362,7 +348,6 @@ body {
         display: block;
     }
 
-        /* Style the hamburger menu */
         .topnav a.icon {
             background: black;
             display: block;
@@ -371,13 +356,11 @@ body {
             top: 0;
         }
 
-        /* Add a grey background color on mouse-over */
         .topnav a:hover {
             background-color: #ddd;
             color: black;
         }
 
-/* Style the active link (or home/logo) */
 .active {
     background-color: #04AA6D;
     color: white;
@@ -391,7 +374,7 @@ body {
 .box {
     
     width: 900px;
-    min-height: 400px; /* just for testing*/
+    min-height: 400px;
     position: relative;
     right: 255px;
     bottom: 10%;
@@ -425,7 +408,7 @@ body {
     }
 .boxs {
     width: 500px;
-    min-height: 500px; /* just for testing*/
+    min-height: 500px; 
     position: absolute;
     right: 85px;
     top: 135%;
