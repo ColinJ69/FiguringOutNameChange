@@ -85,19 +85,19 @@ def get_air(x):
 	  ],
 	}
 
-	gyatt = requests.post('https://airquality.googleapis.com/v1/history:lookup?key=AIzaSyDxGsCeJRDMAgqfTVJBpnHpVQ-vE_7K1cI', json=params)
-	i = gyatt.json()
+	link = requests.post('https://airquality.googleapis.com/v1/history:lookup?key=AIzaSyDxGsCeJRDMAgqfTVJBpnHpVQ-vE_7K1cI', json=params)
+	i = link.json()
 
 
-	#pollutants = i['hoursInfo'][0]['pollutants']
-	#co = pollutants[0]['concentration']['value']
-	#no = pollutants[1]['concentration']['value']
-	#o3 = pollutants[2]['concentration']['value']
-	#pm10=pollutants[3]['concentration']['value']
-	#pm25=pollutants[4]['concentration']['value']
-	#so2 =pollutants[5]['concentration']['value']
+	pollutants = i['hoursInfo'][0]['pollutants']
+	co = pollutants[0]['concentration']['value']
+	no = pollutants[1]['concentration']['value']
+	o3 = pollutants[2]['concentration']['value']
+	pm10=pollutants[3]['concentration']['value']
+	pm25=pollutants[4]['concentration']['value']
+	so2 =pollutants[5]['concentration']['value']
 
-	return [10, 10, 10, 10, 10, 20]
+	return [co, no, o3, pm10, pm25, so2]
 
 
 
