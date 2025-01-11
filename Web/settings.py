@@ -20,7 +20,7 @@ ROOT_URLCONF = 'Web.urls'
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-fxqceg65bo75&s5ijx786ok1j9wghkaiwu(=ie(ut)g)(o341#'
+SECRET_KEY = xxxxxxxx
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -59,8 +59,8 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_PORT = 587
-EMAIL_HOST_USER = 'hydrohavennc@gmail.com'
-EMAIL_HOST_PASSWORD = 'xbhu wjcv uzhr rsgs'
+EMAIL_HOST_USER = xxxxxxxxxxxxxxxxx
+EMAIL_HOST_PASSWORD = xxxxxxxxxxxxxxxx
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
 TEMPLATES = [
