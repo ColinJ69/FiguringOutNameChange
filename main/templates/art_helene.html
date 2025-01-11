@@ -1,0 +1,191 @@
+﻿<!DOCTYPE html>
+{% load static %}
+{% load django_bootstrap5 %}
+{% bootstrap_css %}
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <link id="sheet-theme" rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <meta charset="utf-8" />
+    <title></title>
+    <style>
+        ul {
+            list-style-type: none;
+        }
+
+        a {
+            color: black;
+        }
+
+            a:hover {
+                text-decoration: underline;
+            }
+        placeholder{
+            color:black;
+        }
+        body {
+            background: rgb(252, 222, 190,0.5);
+            display: block;
+            
+        }
+        p{
+            color:black;
+        }
+        
+    </style>
+</head>
+<body style="font-family:Poppins, sans-serif;">
+    <nav role="navigation">
+
+        <div id="menuToggle">
+
+            <input type="checkbox" />
+
+
+            <span style="background: #aaaaaa;"></span>
+            <span style="background: #aaaaaa;"></span>
+            <span style="background: #aaaaaa;"></span>
+
+
+            <ul id="menu" style="background: #2F2F2F; color:white;">
+                <a href="/">
+                <li style="color:white">Home</li></a>
+                <a href="guides">
+                <li style="color:white">Guides</li></a>
+                <a href="maps">
+                <li style="color:white">Maps</li></a>
+                <a href="games">
+                <li style="color:white">Quizzes</li></a>
+                <a href="action">
+                <li style="color:white">Take action</li></a>
+
+            </ul>
+        </div>
+
+    </nav>
+    {% if request.user.is_staff %}
+    <button onclick="post()" style="position: absolute; right:0;">Post story</button>
+    <script>
+    function post() {
+        const cookie = document.cookie.slice(-32)
+        const BASE_URL = '{{ request.scheme }}://{{ request.get_host }}/';
+
+
+        const API_URL = BASE_URL + "/post_story";
+        const sent_data = {'story': 'helene'}
+        const request = new Request(
+            API_URL,
+            { headers: { 'X-CSRFToken': cookie, 'Content-Type': 'application/json' } }
+        );
+        fetch(request, {
+            method: 'POST',
+            mode: 'same-origin',
+            body: JSON.stringify(sent_data)
+        })
+
+            .then(response => response.json())
+
+
+
+
+    }
+
+    </script>
+    {% endif %}
+    <div style="text-align: center; height: 450px; width: 100%; padding: 100px; background: rgb(212, 210, 165,0.7); padding-left: 10px;">
+        <p style="margin-top: 10px; font-size: 3.5rem; color: #2F2F2F;width:60%; margin-left:20%;border-bottom:2px solid black;">
+
+            Impacts of Hurricane Helene on Western NC's water quality
+
+        </p>
+
+    </div>
+    <span class="fade_rule"></span>
+    <div style="height:160%;width:100%; text-align: center;display:block">
+        <div style="height:100%; width:50%;float:left;">
+            <br />
+            <h2 style="font-size:4rem;position:relative;left:40%;white-space:nowrap; color:transparent">Status of water in peoples homes</h2>
+
+            <p style="padding:10%;font-size:1.75rem;word-spacing:15px;line-height:4rem;">
+                The millions who call the western part of the state home have been struck hard by the recent devastating Hurricane Helene.<br />
+                As a result of this, hundreds of lives and millions in infrastructure and homes have been lost. As of today, many residents are stuck with insane levels of flooding and a lack of vital resources including clean water, food, and stable shelter.
+                On the topic of water, residents have been advised to boil water before drinking it, and to test their wells before drinking from them. A large percentage of the residents have as such opted to drink from bottled water from local distrubution centers.
+            </p>
+        </div>
+        <div style="height:100%;width:50%;float:right;"><h6 style="position: relative;top:100px;right:250px"></h6><p style="position:relative;width:10%;display:block;top:70px;left:500px">10/01/24</p><span style="" class="boxees"></span></div>
+
+    </div>
+
+    <div style="text-align: center; height: 120%; width: 100%; display: inline-block; float:right; position:relative;margin-top:10%;padding-left:0%;">
+        <div style="background: rgb(212, 210, 165,0.8); height: 8%; position: absolute; top: 0; width: 100%;"></div>
+        <div style="width:50%;float:left;padding:2%;height:90%;overflow:hidden;padding-top:40%;">
+            <img style="border: 0.5px solid #D4D2A5; width: 100%; height: 100%;" src="https://npr.brightspotcdn.com/dims4/default/8b4d781/2147483647/strip/true/crop/1692x1042+310+0/resize/880x542!/quality/90/?url=http%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2Fe6%2F29%2F9b6a50c142e79cff0c7160d28f21%2Fmarshall-leslie-kirkland-jackson.jpg" />
+        </div>
+        <span style="width:50%; float:right; padding-right:10%;height:90%;margin-top:10%;">
+            <p style="font-size:2.5rem">Resulting water pollution from Helene</p>
+            <br /><hr style="border:2px solid grey;opacity:1;"><br /><br />
+            <p style="width: 100%; position: relative; padding: 10%; font-size: 1.75rem; word-spacing: 15px; line-height: 4rem;">
+                The floodwaters brought upon by Helene have carried with them many pollutants and diseases from nearby industrial plants and waste plants. That along with the
+                damage to water treatment facilities make it difficult for towns to provide clean water for their residents. As a largely rural area, many of the residents use private wells for their primary water source, which are even more
+                vulnerable to pollution from these floodwaters.
+            </p>
+        </span>
+    </div>
+    <div style="height:100%;width:100%;padding:10%;display:inline-block;margin-top:15%;">
+        <p style="font-size:2.5rem;text-align:center;">Resulting water pollution from Helene</p>
+        <br /><hr style="border:2px solid grey;opacity:1;"><br /><br />
+        <p style="width: 100%; position: relative; padding: 10%; font-size: 1.75rem; word-spacing: 15px; line-height: 4rem;">
+            The floodwaters brought upon by Helene have carried with them many pollutants and diseases from nearby industrial plants and waste plants. That along with the
+            damage to water treatment facilities make it difficult for towns to provide clean water for their residents. As a largely rural area, many of the residents use private wells for their primary water source, which are even more
+            vulnerable to pollution from these floodwaters.
+        </p>
+    </div>
+    <footer class="footer" style="position: relative; display: block; background: #D4D2A5">
+        <div style="font-size:1rem;width:20%;height:100%;float:left">
+            <ul>
+                <li>
+                    <p><a href="about">About us</a></p>
+                </li>
+                <li>
+                    <p><a href="mailto:hydrohavennc@gmail.com">Email us any concerns/questions</a></p>
+                </li>
+                <li>
+                    <p><a onclick="privacy()">Privacy policy</a></p>
+                </li>
+            </ul>
+        </div>
+        <div style="width: 20%;position:relative;height:100%;float:left;">
+            {% if logged_in %}
+
+            {% if signed_up %}
+            <div id="unsubscribe" style="margin-top:-1%;">
+                <p style="font-size: 1.25rem; position: relative; float: left;">Unsubscribe </p><a class="x2" onclick="unsub()"></a>
+            </div>
+            {% else %}
+            <div id="subscribe" style="margin-top:-5%;">
+                <p>Sign up for our bi-weekly newsletter in one click!</p>
+                <hr style="font-size:2rem; background-color:grey;" />
+                <button style="border:1px solid black;" onclick="sign_up()">Sign up</button>
+            </div>
+            {% endif %}
+
+            {% else %}
+            <div id="subscribe" style="margin-top:-5%;height:140%;">
+
+                <p>Sign up for our bi-weekly newsletter!</p>
+                <hr style="font-size:2rem; background-color:grey;" />
+                <input name="noAccEmail" id="noAccEmail" type="text" style="width:86%;" placeholder="email">
+                <button style="border:1px solid black;width:86%;border-color:grey;border-radius:3px;" onclick="sign_up_no_acc()">Sign up</button>
+
+            </div>
+            {% endif %}
+        </div>
+        <div style="width:60%;float:right;height:100%;position:relative;">
+            <img style="margin-left:55%;margin-top:-10%;height:200%;width:60%;" src="https://github.com/ColinJ69/NC-Water-Watch/raw/main/images/HydroHaven.svg" />
+            <p style="margin-top:-5%;margin-left:76%;">
+                ©Hydro Haven 2024
+            </p>
+        </div>
+    </footer>
+
+</body>
+</html>

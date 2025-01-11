@@ -1,0 +1,551 @@
+﻿<!DOCTYPE html>
+{% load static %}
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NC Water Watch</title>
+    <link id="sheet-theme" rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    {% load django_bootstrap5 %}
+    {% bootstrap_css %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0-11/css/all.min.css">
+    <style>
+        a {
+            color: black
+        }
+
+
+        #menu li {
+            color: white;
+            margin-top: 10px;
+        }
+
+            #menu li:hover {
+                color: #FF8C00;
+                font-size: 20px;
+            }
+
+        body {
+        }
+
+        ul {
+            list-style-type: none;
+        }
+
+        hr {
+            display: block;
+            opacity: 1;
+        }
+
+        #repForm input {
+            border-color: grey;
+        }
+
+        a {
+            color: black;
+            text-decoration: none;
+        }
+
+            a:hover {
+                color: black;
+                text-decoration: underline;
+            }
+    </style>
+</head>
+<body style="background-color: #f9f9f9 ">
+    <nav role="navigation">
+        
+        <div id="menuToggle">
+
+            <input type="checkbox" />
+
+
+            <span style="background: #ffffff;"></span>
+            <span style="background: #ffffff;"></span>
+            <span style="background: #ffffff;"></span>
+
+
+            <ul id="menu" style="background: #2F2F2F; color:white;">
+                <a href="/">
+                <li>Home</li></a>
+                <a href="guides">
+                <li>Guides</li></a>
+                <a href="maps">
+                <li>Maps</li></a>
+                <a href="games">
+                <li>Quizzes</li></a>
+                <a href="action">
+                <li>Take action</li></a>
+                <a href="news">
+                <li>News</li></a>
+
+
+                <li style="color:darkorange">
+                    <a style="position: relative; bottom: 0%;color:darkorange;" href="{% url 'logouts' %}">
+                        <h5>Logout</h5>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+    </nav>
+    <br /><br />
+
+    <div class="action" style="text-align: center">
+        <h1 style="" id="actionPageTitle">Take action</h1>
+
+
+        
+
+
+    </div>
+    <div id="currLeg">
+        <div style="" id="currLegIntro">
+            <p style="" id="currLegTitle">Current Legistlation</p>
+            <hr style="border: 2px solid rgb(65, 101, 138,0.8); width: 100%; position: relative;" />
+            <p style="" id="currLegDes">An assembled list of legistlation related to water quality in the process of passing</p>
+        </div>
+        <div style="" id="currLegCom">
+            <div style="" class="currLegActs">
+                <h1>2024 Farm Bill</h1>
+                <p style="position:absolute; top:0;right:1.5%;font-family:Book Antiqua"></p>
+                <hr style="background: rgb(65, 64, 115);" />
+                <div style="display: inline-block; display: flex; justify-content: space-between; margin: 0 50px;  ">
+
+                    <p style=""><i>7/20/24</i></p>
+                    <p><i>U.S. Congress</i></p>
+                </div>
+
+                <hr style="background: rgb(65, 64, 115);" />
+                <div style="" class="billDesc">
+                    <p>Description of this bill, this bill is about the farm bill of 2024 and it can affect the environment is some very very bad ways idk edit later</p>
+                </div>
+                <button class="btn btn-secondary currLegBtn" style="background-color: rgb(65, 101, 138);">Learn more</button>
+            </div>
+            <div class="currLegActs">
+                <h1>2024 Farm Bill</h1>
+                <hr style="background:black;" />
+                <div style="display: inline-block; display: flex; justify-content: space-between; margin: 0 50px; ">
+
+                    <p style=""><i>7/20/24</i></p>
+                    <p><i>U.S. Congress</i></p>
+                </div>
+
+                <hr style="background:black;" />
+                <div class="billDesc">
+                    <p>Description of this bill, this bill is about the farm bill of 2024 and it can affect the environment is some very very bad ways including your mom.</p>
+                </div>
+                <button class="btn btn-secondary currLegBtn" style="background-color: rgb(65, 101, 138);">Learn more</button>
+            </div>
+            <div class="currLegActs">
+                <h1>2024 Farm Bill</h1>
+                <hr style="background:black;" />
+                <div style="display: inline-block; display: flex; justify-content: space-between; margin: 0 50px; ">
+
+                    <p style=""><i>7/20/24</i></p>
+                    <p><i>U.S. Congress</i></p>
+                </div>
+
+                <hr style="background:black;" />
+                <div class="billDesc">
+                    <p>Description of this bill, this bill is about the farm bill of 2024 and it can affect the environment is some very very bad ways including your mom.</p>
+                </div>
+                <button class="btn btn-secondary currLegBtn" style="background-color: rgb(65, 101, 138);">Learn more</button>
+            </div>
+            <div class="currLegActs">
+                <h1>2024 Farm Bill</h1>
+                <hr style="background:black;" />
+                <div style="display: inline-block; display: flex; justify-content: space-between; margin: 0 50px; ">
+
+                    <p style=""><i>7/20/24</i></p>
+                    <p><i>U.S. Congress</i></p>
+                </div>
+
+                <hr style="background:black;" />
+                <div class="billDesc">
+                    <p>Description of this bill, this bill is about the farm bill of 2024 and it can affect the environment is some very very bad ways including your mom.</p>
+                </div>
+                <button class="btn btn-secondary currLegBtn" style="background-color: rgb(65, 101, 138);">Learn more</button>
+            </div>
+        </div>
+
+
+    </div>
+    <div style="height:300px;width:100%;display:inline-block;position:relative">
+
+    </div>
+    <div id="petitions">
+
+        <span class="Comm">
+
+            <div class="info-icon" style="margin-left:-0.5%;">i</div>
+            <div class="contact_div">
+                <p>Comment periods are periods of time where local government officials are looking for the publics' opinion on a specific policy. They are great ways to make your voice heard on local issues.</p>
+            </div>
+            <p style="text-align: center; font-size: 2rem">Comment periods</p>
+            <hr style="border:2px solid grey;" /><br />
+            <div style="color: black; display: block; width: 100%;height:10%;"><h6 style=" position: relative; float:left;left:5%;">Topic</h6><p style=" position: relative; float: right; right: 5%; text-align: right;">Period ends</p></div>
+            <span class="leaderboardz-item"><h6 style="height: 100%; width:40%;">Permit to White Oak Landfill</h6><p style="height: 100%; width: 25%; text-align: right;">Nov. 22</p></span>
+            <span class="leaderboardz-item"><h6 style="height: 100%; width:40%;">Broad River Basin Plan</h6><p style="height: 100%; width: 25%; text-align: right;">Nov. 22</p></span>
+            <span class="leaderboardz-item"><h6 style="height: 100%; width:40%;">Transcontinental Gas Pipe Line Company, LLC - Station 160</h6><p style="height: 100%; width: 25%; text-align: right;">Dec. 2</p></span>
+            <span class="leaderboardz-item"><h6 style="height: 100%; width:40%;">State Guidelines for Land Use Planning</h6><p style="height: 100%; width: 25%; text-align: right;">Nov. 9</p></span>
+            <span class="leaderboardz-item"><h6 style="height: 100%; width:40%;">Final Approval of State Underground Storage Tank Program Revisions</h6><p style="height: 100%; width: 25%; text-align: right;">Oct. 31</p></span>
+            <span class="leaderboardz-item"><h6 style="height: 100%; width:40%;">The City of Havelock-Havelock Collection System</h6><p style="height: 100%; width: 25%;text-align:right;">Nov. 11</p></span>
+        </span>
+    </div>
+
+    <div id="lawsuits">
+
+
+        <span class="Comm">
+
+            <div class="info-icon" style="margin-left:-0.5%;">i</div>
+            <div class="contact_div">These are public hearings held by local government offices. You are welcome and encouraged to attend so you can listen and voice your opinion in the meeting.</div>
+            <p style="text-align:center;font-size:2rem;">Hearings</p>
+            <hr style="border:2px solid grey;" /><br />
+            <div style="color: black; display: block; width: 100%;height:10%;"><h6 style=" position: relative; float:left;left:5%;">Topic</h6><p style=" position: relative;float:right;right:45%;">Date</p></div>
+            <span class="leaderboardz-item"><h6 style="height: 100%;font-size:0.75rem; width:45%;">Preliminary Determination of Air Quality Permit Application for Duke Energy Progress</h6><p style="height: 100%; width: 25%;">Nov. 22</p><p style="height: 100%; width: 25%; text-align: right;"><a href="https://www.deq.nc.gov/news/events/public-hearing-preliminary-determination-air-quality-permit-application-duke-energy-progress-llc">More info</a></p></span>
+            <span class="leaderboardz-item"><h6 style="height: 100%; font-size: 0.75rem; width: 45%;">Public Hearing - Straw Bales as Sand Fencing</h6><p style="height:100%;width:25%;">Oct. 30</p><p style="height: 100%; width: 25%; text-align: right;"><a>More info</a></p></span>
+            <span class="leaderboardz-item"><h6 style="height: 100%; font-size: 0.75rem; width: 45%;">Vanceboro Quarry discharge permit</h6><p style="height:100%;width:25%;">Nov. 19</p><p style="height: 100%; width: 25%; text-align: right;"><a>More info</a></p></span>
+        </span>
+    </div>
+
+    
+    
+                <div id="repForm">
+                    {% if not rep_sub %}
+                    <script>
+                        window.onload = function () {
+
+                            try {
+                                var house = localStorage.getItem('house');
+                                var house_email = localStorage.getItem('house_email');
+                                var house_img = localStorage.getItem('house_img');
+                                var senate = localStorage.getItem('senate');
+                                var senate_email = localStorage.getItem('senate_email');
+                                var senate_img = localStorage.getItem('senate_img');
+                                var congress = localStorage.getItem('congress');
+                                var link = localStorage.getItem('link');
+                                var con_img = localStorage.getItem('con_img');
+                                console.log(house, house_email, house_img, senate, senate_email, senate_img, congress, link, con_img)
+                                document.querySelector('#house').textContent = house;
+                                document.querySelector('#house_email').href = house_email;
+                                document.querySelector('#house_img').src = house_img;
+                                document.querySelector('#senate').textContent = senate;
+                                document.querySelector('#sen_email').href = senate_email;
+                                document.querySelector('#senate_img').src = senate_img;
+                                document.querySelector('#congress').textContent = congress;
+                                document.querySelector('#link').href = link;
+                                document.querySelector('#conpic').src = con_img;
+
+                                document.querySelector('#notSubmittedForm').style.display = 'none';
+                                document.querySelector('#storagePassed').style.display = 'block';
+                                document.querySelector('#repForm').style.height = '70%';
+                            }
+                            catch (e) {
+                                if (e.name === 'QuotaExceededError') {
+                                    console.log('Quota exceeded!');
+                                }
+                            };
+                        }
+                    </script>
+                    <div id="notSubmittedForm">
+                        <h3 style="width: 100%; height: 10%; color: #2F2F2F; font-size: 3rem; font-family: Quicksand; opacity: 0.8" class="repformtitle">Find out who your representatives are</h3>
+                        <hr style="border:2px solid grey" />
+                        <form method="post" style="border: 1px solid white; border-radius: 5px; padding: 10%; height:90%;background: rgb(47,47,47,0.05);">
+                            {% csrf_token %}
+                            {{repform.as_p}}
+                            <button class="getcoord" onclick="getLocation()" type="button">Autofill</button>
+                            <button class="subrepadd" type="submit" name="repForm">Submit</button>
+
+                        </form><br /><br />
+                    </div>
+                    <div id="storagePassed">
+                        <span style="" class="reptitle">
+                            <p style="color:#2F2F2F">Your representatives</p>
+                            <hr style="border:2px solid grey;" />
+                            <br />
+                        </span>
+                        <div class="yourreps" style="">
+
+                            <p id="house" class="repname" style="border-bottom: 1px solid grey; padding-bottom: 5%; "></p>
+
+                            <img id="house_img" src="{% static housepic %}">
+                            <p>N.C. House</p>
+                            <a id="house_email" href=""  target="_blank">Contact</a>
+                        </div>
+                        <div class="yourreps" style="">
+
+                            <p id="senate" class="repname" style="border-bottom: 1px solid grey; padding-bottom: 5%; "></p>
+
+                            <img id="senate_img" src="{% static senpic %}">
+                            <p>N.C. Senate</p>
+                            <a id="sen_email" href="" target="_blank">Contact</a>
+                        </div>
+                        <div class="yourreps" style="">
+
+                            <p id="congress" class="repname" style="border-bottom: 1px solid grey; padding-bottom: 5%; "></p>
+
+                            <img id="conpic" src="{% static conpic %}">
+                            <p>U.S. House</p>
+                            <a id="link" href="" target="_blank">Contact</a>
+                        </div>
+                    </div>
+                    {% else %}
+                    <script>
+                        window.onload = function () {
+
+                            document.querySelector('#repForm').scrollIntoView();
+                            let element = document.getElementById('repForm');
+                            try {
+
+
+                                localStorage.setItem('house', document.querySelector('#house').textContent);
+                                localStorage.setItem('house_email', document.querySelector('#house_email').href);
+
+                                localStorage.setItem('house_img', document.querySelector('#house_img').src);
+
+                                localStorage.setItem('senate', document.querySelector('#senate').textContent);
+
+
+                                localStorage.setItem('senate_email', document.querySelector('#sen_email').href);
+                                localStorage.setItem('senate_img', document.querySelector('#senate_img').src);
+                                console.log(document.querySelector('#senate_img').src)
+                                localStorage.setItem('congress', document.querySelector('#congress').textContent);
+                                localStorage.setItem('link', document.querySelector('#link').href);
+                                localStorage.setItem('con_img', document.querySelector('#conpic').src);
+                                console.log(document.querySelector('#congress').textContent)
+                                document.querySelector('#repForm').style.height = '70%';
+
+
+                            }
+                            catch {
+
+                            }
+                        };
+                    </script>
+                    <div>
+                        <span style="width: 100%; height: 20%; float: left; font-size: 3rem; text-align: left; color: #2F2F2F">
+                            <p style="color:#2F2F2F">Your representatives</p>
+                            <hr style="border:2px solid grey;" />
+                            <br />
+                        </span>
+                        <div class="yourreps" style="margin-right:80px;">
+
+                            <p id="house" style="border-bottom: 1px solid grey; font-size: 1.5rem; padding-bottom: 5%; "></p>
+
+                            <img id="house_img" src="{% static housepic %}">
+                            <p style="margin-top: 5%; border-bottom: 2px solid grey; font-size: 1.15rem;">N.C. House</p>
+                            <a id="house_email" href=""  target="_blank">Contact</a>
+                        </div>
+                        <div class="yourreps" style="margin-right:60px">
+
+                            <p id="senate" style="border-bottom: 1px solid grey; font-size: 1.5rem; padding-bottom: 5%; "></p>
+
+                            <img id="senate_img" src="{% static senpic %}">
+                            <p style="margin-top: 5%; font-size: 1.15rem; border-bottom: 2px solid grey; ">N.C. Senate</p>
+                            <a id="sen_email" href="" target="_blank">Contact</a>
+                        </div>
+                        <div class="yourreps" style="margin-right:60px">
+
+                            <p id="congress" style="border-bottom: 1px solid grey; font-size: 1.5rem; padding-bottom: 5%; "></p>
+
+                            <img id="conpic" src="{% static conpic %}">
+                            <p style="margin-top: 5%; font-size:1.15rem;border-bottom: 2px solid grey;">U.S. House</p>
+                            <a id="link" href="" target="_blank">Contact</a>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+                <footer class="footer" style="display:block;position:relative;margin-top:10%;">
+                    <span id="contactlinks">
+                        <ul>
+                            <li>
+                                <p><a href="about">About us</a></p>
+                            </li>
+                            <li>
+                                <p><a href="mailto:hydrohavennc@gmail.com">Email us any concerns/questions</a></p>
+                            </li>
+                            <li>
+                                <p><a onclick="privacy()">Privacy policy</a></p>
+                            </li>
+                        </ul>
+                    </span>
+                    <div style="width: 40%;position:relative;height:100%;float:left;">
+                        {% if logged_in %}
+
+                        {% if signed_up %}
+                        <div id="unsubscribe" style="">
+                            <p style="font-size: 1.25rem; position: relative; float: left;" onclick="unsub()">Unsubscribe </p><a class="x2" onclick="unsub()"></a>
+                        </div>
+                        {% else %}
+                        <div id="subscribe" style="">
+                            <p>Sign up for our bi-weekly newsletter in one click!</p>
+                            <hr style="font-size:2rem; background-color:grey;" />
+                            <button style="border: 1px solid black; width: 86%; border-radius: 3px; border-color: grey" onclick="sign_up()">Sign up</button>
+                        </div>
+                        {% endif %}
+
+                        {% else %}
+                        <div id="subscribe" style="">
+
+                            <p>Sign up for our bi-weekly newsletter!</p>
+                            <hr style="font-size:2rem; background-color:grey;" />
+                            <input name="noAccEmail" id="noAccEmail" type="text" placeholder="email" style="width:86%;">
+                            <button style="border:1px solid black;width:86%;border-color:grey;border-radius:3px;" onclick="sign_up_no_acc()">Sign up</button>
+
+                        </div>
+                        {% endif %}
+                    </div>
+                    <div style="width:40%;float:right;height:100%;position:relative;">
+                        <img style="margin-left:55%;margin-top:-10%;height:200%;width:60%;" src="https://github.com/ColinJ69/NC-Water-Watch/raw/main/images/HydroHaven.svg" />
+                        <p style="margin-top:-5%;margin-left:76%;">
+                            ©Hydro Haven 2024
+                        </p>
+                    </div>
+
+                </footer>
+
+    <script>
+                
+        function cnpFunc() {
+            var copyText = document.getElementById("email");
+            copyText.select();
+            navigator.clipboard.writeText(copyText.value);
+
+
+            alert("Copied the text: " + copyText.value);
+
+        }
+
+
+        function showContact() {
+
+
+
+            document.querySelector('#showReps').style.display = 'block';
+            document.querySelector('#gyatt').style.display = 'none';
+
+        }
+        function end() {
+            document.querySelector('#showReps').style.display = 'none';
+        }
+        function openComm() {
+            var i = document.querySelector('#Comm')
+            var j = document.querySelector('#cock')
+            if (i.style.display == 'none') {
+                i.style.display = 'block';
+                j.style.display = 'none';
+            }
+            else {
+                i.style.display = 'none';
+                j.style.display = 'block';
+            }
+        }
+        function unsub() {
+            const BASE_URL = '{{ request.scheme }}://{{ request.get_host }}/';
+
+            let sent_data = { 'register': false }
+            const API_URL = BASE_URL + "/newsletter_signup";
+
+            const request = new Request(
+                API_URL,
+                { headers: { 'X-CSRFToken': dsd, 'Content-Type': 'application/json' } }
+            );
+
+            window.location.reload();
+
+            return fetch(request, {
+                method: 'POST',
+                mode: 'same-origin',
+                body: JSON.stringify(sent_data)
+            })
+                .then(response => response.json())
+                .then(response => {
+                    data = response['time']; return data;
+                })
+
+        }
+        function openHear() {
+            var i = document.querySelector('#hearings')
+            var j = document.querySelector('#balls')
+            if (i.style.display == 'none') {
+                i.style.display = 'block';
+                j.style.display = 'none';
+            }
+            else {
+                i.style.display = 'none';
+                j.style.display = 'block';
+            }
+        }
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition, showError);
+            } else { document.getElementById("location").innerHTML = "Geolocation is not supported by this browser."; }
+        }
+        function showPosition(position) {
+            document.getElementById("cj").value = position.coords.latitude + ", " + position.coords.longitude;
+        }
+        function showError(error) {
+            switch (error.code) {
+                case error.PERMISSION_DENIED: document.getElementById("location").innerHTML = "User denied the request for Geolocation."; break;
+                case error.POSITION_UNAVAILABLE: document.getElementById("location").innerHTML = "Location information is unavailable."; break;
+                case error.TIMEOUT: document.getElementById("location").innerHTML = "The request to get user location timed out."; break;
+                case error.UNKNOWN_ERROR: document.getElementById("location").innerHTML = "An unknown error occurred."; break;
+            }
+        }
+        var isd = document.cookie
+        var dsd = isd.slice(-32)
+
+        function sign_up() {
+            const BASE_URL = '{{ request.scheme }}://{{ request.get_host }}/';
+
+            let sent_data = { 'register': true }
+            const API_URL = BASE_URL + "/newsletter_signup";
+
+            const request = new Request(
+                API_URL,
+                { headers: { 'X-CSRFToken': dsd, 'Content-Type': 'application/json' } }
+            );
+
+            window.location.reload();
+
+            return fetch(request, {
+                method: 'POST',
+                mode: 'same-origin',
+                body: JSON.stringify(sent_data)
+            })
+                .then(response => response.json())
+                .then(response => {
+                    data = response['time']; return data;
+                });
+        }
+        function sign_up_no_acc() {
+            const BASE_URL = '{{ request.scheme }}://{{ request.get_host }}/';
+
+            let sent_data = { 'email': document.querySelector('#noAccEmail').value }
+            const API_URL = BASE_URL + "/newsletter_signup";
+
+            const request = new Request(
+                API_URL,
+                { headers: { 'X-CSRFToken': dsd, 'Content-Type': 'application/json' } }
+            );
+
+            window.location.reload();
+
+            return fetch(request, {
+                method: 'POST',
+                mode: 'same-origin',
+                body: JSON.stringify(sent_data)
+            })
+                .then(response => response.json())
+                .then(response => {
+                    data = response['time']; return data;
+                })
+        }
+    </script>
+</body>
+</html>

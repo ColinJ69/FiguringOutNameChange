@@ -1,0 +1,647 @@
+﻿
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>NC Water Watch</title>
+    <link id="sheet-theme" rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <script>
+
+    </script>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    {% load django_bootstrap5 %}
+    {% bootstrap_css %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0-11/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <meta name="google-signin-client_id" content="'374367816012-503cj4pjim8oe0obtglknt0b4ajrq1an.apps.googleusercontent.com'">
+    <style>
+        #menu li {
+            color: white;
+            margin-top: 10px;
+        }
+
+            #menu li:hover {
+                color: #FF8C00;
+                font-size: 20px;
+            }
+        .custom-file-input {
+            display: none;
+        }
+
+        .custom-file-label {
+            display: inline-block;
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .footer ul {
+            list-style-type: none;
+        }
+        a {
+            color: black;
+            text-decoration: none;
+        }
+
+            a:hover {
+                color: black;
+                text-decoration: underline;
+            }
+        body{
+            width:100%;
+        }
+    </style>
+</head>
+<body style="background-color: #f7f7f7f7">
+    <nav role="navigation">
+        <div id="image"></div>
+        <div id="menuToggle">
+
+            <input type="checkbox" />
+
+
+            <span style="background: #ffffff;"></span>
+            <span style="background: #ffffff;"></span>
+            <span style="background: #ffffff;"></span>
+
+
+            <ul id="menu" style="background: #2F2F2F; color:white;">
+                <a href="/">
+                <li>Home</li></a>
+                <a href="guides">
+                <li>Guides</li></a>
+                <a href="maps">
+                <li>Maps</li></a>
+                <a href="games">
+                <li>Quizzes</li></a>
+                <a href="action">
+                <li>Take action</li></a>
+                <a href="news">
+                <li>News</li></a>
+
+
+                <li style="color:darkorange">
+                    <a style="position: relative; bottom: 0%;color:darkorange;" href="{% url 'logouts' %}">
+                        <h5>Logout</h5>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <img style="position: absolute; width: 100%; max-height: 900px; min-height: 600px; margin-top: -50%;" src="https://github.com/ColinJ69/NC-Water-Watch/raw/main/images/HydroHaven.svg" />
+    </nav>
+
+    <button id="actionBtn"><a style="color:white;" href="action">Take action</a></button>
+    <div style="text-align: center;  height: 220px ">
+
+        
+        <h3 style="" id="bannertxt">We are a leading organization in providing awareness for water pollution across North Carolina.</h3>
+    </div>
+    
+    
+    <div id="login">
+        <p style="font-size:2rem;">Login</p>
+        <form method="post">
+            {% csrf_token %}
+            {{form.as_p}}
+            <button class="btn btn-secondary" style="width:397.5px; border-radius:5px;height:35px;" name="userLog" type="submit">Submit</button>
+        </form>
+        <br /><br />
+        <p style="float:left">Don't have an account? <a style="color:dodgerblue;cursor:pointer" onclick='register()'>Create account</a></p>
+        <p style="float:left">Forgot password?<a style="color:dodgerblue" href="password_reset"> Click here</a></p>
+
+
+
+    </div>
+    <div id="register">
+        <p style="font-size:2rem;">Create account</p>
+        <form method="post">
+            {% csrf_token %}
+            {{forms.as_p}}
+            <button class="btn btn-secondary" style="width: 397.5px; border-radius: 5px; height: 35px; border: 2px solid rgba(0, 0, 0, 0.1);" name="userReg" type="submit">Submit</button>
+            <p style="float:left;">Already have an account? <a style="color:dodgerblue;cursor:pointer;" onclick='login()'>Login here</a></p>
+            <p style="float:left;">Forgot password? <a style="color:dodgerblue" href="password_reset">Click here</a></p>
+        </form>
+        <div class="g-signin2" data-onsuccess="onSignIn"></div>
+    </div>
+    <div class="reset">
+        <input value="email" id="enterEmail" />
+        <div class="form-buttons">
+            <input type="submit" value="Send" onclick="resetEmail()" class="btn btn-primary">
+            <a href="{%url 'logins' %}" class="btn btn-outline">Cancel</a>
+        </div>
+
+    </div>
+    {% if logged_in %}
+    <div onclick="openProfile()" id="profilebtn"><img id="pfp" src="https://th.bing.com/th/id/OIP.YOCYcAmmqZOMDcP9mc2M6wHaHa?w=199&h=199&c=7&r=0&o=5&dpr=1.3&pid=1.7" /></div>
+    <div class="profile">
+        <h4>User: {{usern}}</h4>
+        <h4 class="profilepoints"></h4>
+
+
+        <input type="file" id="fileInput" onchange="handleFileSelect(event)" />
+        <label for="fileInput" class="custom-file-upload"> <p>Change profile picture</p></label>
+
+    </div>
+    {% else %}
+    <button onclick="login()" style="position:absolute; border:1px solid white;top:28px;right:40px;border-radius:15px;background-color:darkslategrey;color:white;height:50px;width:120px">
+        <p style="font-size:1.75rem;">Login</p>
+    </button>
+    {% endif %}
+
+    <div style="position: relative; display:inline-block;  width: 100%; height: 3400px">
+        <span style="" id="homeguides">
+            <div style=" "id="homeguidetxt">
+                <h1 style="position: relative; font-size: 4rem;">Who are we?</h1>
+                <a href="guides"><button style="position: relative; height: 75px; width: 200px; font-size:1.6rem;margin-top:10%;">Learn more</button></a>
+            </div>
+            <div class="bg-text" style="">
+
+                <h2></h2><hr style="background-color:white; border:2px solid;"><h2>We are a leading organization in providing awareness for the growing issue of water pollution across North Carolina.</h2>
+                <span style="text-align: center"></span>
+            </div>
+        </span>
+        <span style="display: inline-block; height: 5%; width: 100%; background-color: #7A9E7E "></span>
+        <span style="" id="homemap">
+            <div id="homemaptxt">
+                <h1 style=" position: relative; font-size: 3.5rem;">Interactive maps</h1>
+                <a href="maps"><button style="position: relative; height: 75px; width: 200px;margin-top:10%;  font-size: 1.6rem;">Explore</button></a>
+            </div>
+            <div class="box">
+
+
+            </div>
+
+        </span>
+
+        <span id="homequiz">
+            <div id="homequiztxt">
+                <h1 id="hqth" style="">Quizzes</h1>
+                <a href="games"><button style="">Explore</button></a>
+            </div>
+            <div id="questionday"style="">
+                <div style="width: 100%; height: 10%; display: flex;">
+
+                    <h2 class="qdaytop" style="width:50%;">Question of the day</h2>
+                    <h1 class="qdaytop" style="width:50%" id="response"></h1>
+                </div>
+                <div id="question_divy" style="position: relative; top: 0%;padding:5%">
+                    <h3 id="question" style="position: relative; left: 0%; "></h3>
+                    <form id="formA">
+                        <ol style="font-size: 25px; float: left">
+                            <li><input value="1" name="q" type="radio"><label id="1"></label></li>
+                            <li><input value="2" name="q" type="radio" /><label id="2"></label></li>
+                            <li><input value="3" name="q" type="radio" /><label id="3"></label></li>
+                            <li><input value="4" name="q" type="radio" /><label id="4"></label></li>
+                        </ol>
+
+                    </form>
+                    
+
+
+                </div>
+            </div>
+        </span>
+
+      
+
+
+        <span style="display: inline-block; width: 100%; height: 5%; background: rgb(207, 222, 231); "></span>
+        <span style="display: inline-block; width: 100%; height: 20%;">
+            <div id="homenews">
+                <h1 id="hnt" style="font-size:4rem;">News</h1>
+                <a href="news"><button style="position: relative; height: 75px; margin-top: 10%; width: 200px; font-size: 1.6rem;">Explore</button></a>
+            </div>
+            <div id="homenewsboxdiv">
+                
+                <div id="homenewsbox">
+                    
+                    <hr style="background-color:white; border:2px solid;">
+                    <h4>We are a leading organization in providing awareness for the growing issue of water pollution across North Carolina.</h4>
+                    <span style="text-align: center"></span>
+                </div>
+            </div>
+        </span>
+
+    </div>
+    <p id="num" style="display:none">{{num}}</p>
+    
+    <footer class="footer" style="display:block;position:relative;margin-top:0%;">
+        <span id="contactlinks">
+            <ul>
+                <li>
+                    <p><a href="about">About us</a></p>
+                </li>
+                <li>
+                    <p><a href="mailto:hydrohavennc@gmail.com">Email us any concerns/questions</a></p>
+                </li>
+                <li>
+                    <p><a onclick="privacy()">Privacy policy</a></p>
+                </li>
+            </ul>
+        </span>
+        <div style="width: 40%;position:relative;height:100%;float:left;">
+            {% if logged_in %}
+
+            {% if signed_up %}
+            <div id="unsubscribe" style="">
+                <p style="font-size: 1.25rem; position: relative; float: left;" onclick="unsub()">Unsubscribe </p><a class="x2" onclick="unsub()"></a>
+            </div>
+            {% else %}
+            <div id="subscribe" style="">
+                <p>Sign up for our bi-weekly newsletter in one click!</p>
+                <hr style="font-size:2rem; background-color:grey;" />
+                <button style="border: 1px solid black; width: 86%; border-radius: 3px; border-color: grey" onclick="sign_up()">Sign up</button>
+            </div>
+            {% endif %}
+
+            {% else %}
+            <div id="subscribe" style="">
+
+                <p>Sign up for our bi-weekly newsletter!</p>
+                <hr style="font-size:2rem; background-color:grey;" />
+                <input name="noAccEmail" id="noAccEmail" type="text" placeholder="email" style="width:86%;">
+                <button style="border:1px solid black;width:86%;border-color:grey;border-radius:3px;" onclick="sign_up_no_acc()">Sign up</button>
+
+            </div>
+            {% endif %}
+        </div>
+        <div style="width:40%;float:right;height:100%;position:relative;">
+            <img style="margin-left:55%;margin-top:-10%;height:200%;width:60%;" src="https://github.com/ColinJ69/NC-Water-Watch/raw/main/images/HydroHaven.svg" />
+            <p style="margin-top:-5%;margin-left:76%;">
+                ©Hydro Haven 2024
+            </p>
+        </div>
+
+    </footer>
+
+
+
+
+    <script>
+        window.addEventListener('storage', function (e) {
+            if (e.key === 'profilePicture') {
+                const profilePicElement = document.getElementById('pfp');
+                if (profilePicElement) {
+                    profilePicElement.src = e.newValue;
+
+                }
+            }
+        });
+
+        window.onload = loadProfilePicture;
+        function loadProfilePicture() {
+            const storedImage = localStorage.getItem('profilePicture');
+            console.log(storedImage)
+            if (storedImage) {
+                document.getElementById('pfp').src = storedImage;
+            }
+            else {
+                document.getElementById('pfp').src = "https://th.bing.com/th/id/OIP.YOCYcAmmqZOMDcP9mc2M6wHaHa?w=199&h=199&c=7&r=0&o=5&dpr=1.3&pid=1.7";
+            }
+            myCallback();
+        }
+
+
+        var q = document.getElementById('question');
+        var ans1 = document.getElementById('1');
+        var ans2 = document.getElementById('2');
+        var ans3 = document.getElementById('3');
+        var ans4 = document.getElementById('4');
+        var Correct_Ans;
+
+        function myCallback() {
+            var num = document.querySelector('#num').textContent;
+
+            const cookie = document.cookie.slice(-32)
+
+            const BASE_URL = '{{ request.scheme }}://{{ request.get_host }}/';
+
+            let sent_data = { 'q': btoa(num) }
+
+            const API_URL = BASE_URL + "/stylesheet.css";
+
+            const request = new Request(
+                API_URL,
+                { headers: { 'X-CSRFToken': cookie, 'Content-Type': 'application/json' } }
+            );
+
+            fetch(request, {
+                method: 'POST',
+                mode: 'same-origin',
+                body: JSON.stringify(sent_data)
+            })
+
+                .then(response => response.json())
+
+
+                .then(questions => {
+
+                    var i = atob(questions)
+                    console.log(i)
+                    getQuestionInformation(i)
+
+                }
+                )
+        }
+
+        function getQuestionInformation(questions) {
+            var question = JSON.parse(questions)
+            q.textContent = question['Question'];
+            ans1.innerText = question['Ans_Choices'][0];
+            ans2.innerText = question['Ans_Choices'][1];
+            ans3.innerText = question['Ans_Choices'][2];
+            ans4.innerText = question['Ans_Choices'][3];
+            Correct_Ans = question['Correct_Ans'];
+            ans1.style.color = 'black';
+            ans2.style.color = 'black';
+            ans3.style.color = 'black';
+            ans4.style.color = 'black';
+
+
+        }
+
+
+
+        function unsub() {
+            const BASE_URL = '{{ request.scheme }}://{{ request.get_host }}/';
+
+            let sent_data = { 'register': false }
+            const API_URL = BASE_URL + "/newsletter_signup";
+
+            const request = new Request(
+                API_URL,
+                { headers: { 'X-CSRFToken': dsd, 'Content-Type': 'application/json' } }
+            );
+
+            window.location.reload();
+
+            return fetch(request, {
+                method: 'POST',
+                mode: 'same-origin',
+                body: JSON.stringify(sent_data)
+            })
+                .then(response => response.json())
+                .then(response => {
+                    data = response['time']; return data;
+                })
+
+        }
+        function onSignIn(googleUser) {
+            var profile = googleUser.getBasicProfile();
+            var id_token = googleUser.getAuthResponse().id_token;
+            console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+            console.log('Name: ' + profile.getName());
+            console.log('Image URL: ' + profile.getImageUrl());
+            console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', 'https://yourbackend.example.com/tokensignin');
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            xhr.onload = function () {
+                console.log('Signed in as: ' + xhr.responseText);
+            };
+            xhr.send('idtoken=' + id_token);
+        }
+        function handleFileSelect(event) {
+            const file = event.target.files[0];
+            if (file) {
+                console.log(':3')
+                const reader = new FileReader();
+
+                reader.onload = function (e) {
+                        console.log(reader.result)
+                        const base64Image = reader.result;
+                        localStorage.setItem('profilePicture', base64Image);
+                        console.log(base64Image)
+                        loadProfilePicture();
+                    };
+                    reader.readAsDataURL(file);
+
+
+            } else {
+                console.log("No file selected");
+            }
+        }
+        function openProfile() {
+            var x = document.querySelector(".profile");
+            if (x.style.display === "block") {
+                x.style.display = "none";
+            } else {
+                x.style.display = "block";
+            }
+        }
+
+        function myFunction() {
+            var x = document.getElementById("myLinks");
+            if (x.style.display === "block") {
+                x.style.display = "none";
+            } else {
+                x.style.display = "block";
+            }
+        }
+        function onVisible(element, callback) {
+            new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.intersectionRatio > 0) {
+                        callback(element);
+                        observer.disconnect();
+                    }
+                });
+            }).observe(element);
+            if (!callback) return new Promise(r => callback = r);
+        }
+
+        onVisible(document.querySelector("#hqth"), () =>
+
+            fetch('/get_points')
+                .then(response => response.json())
+                .then(console.log(response))
+                .then(data => {
+                    countIni(JSON.stringify(data));
+                })
+
+
+
+        );
+
+
+
+        function countIni(num) {
+            let startNum = 0,
+                endNum = num,
+                nSecond = 2,
+                resolutionMS = 33,
+                deltaNum = (endNum - startNum) / (1000 / resolutionMS) / nSecond;
+            if (num === 0) {
+                document.querySelector('#response').textContent = 0;
+            }
+            var handle = setInterval(() => {
+
+                var x = startNum.toLocaleString(undefined, {
+                    minimumFractionDigits: 0,
+                    maximumFractionDigits: 0
+                });
+                document.querySelector('#response').textContent = `${x} points`;
+
+                // if already updated the endNum, stop
+                if (startNum >= endNum) clearInterval(handle);
+
+                startNum += deltaNum;
+                startNum = Math.min(startNum, endNum);
+            }, resolutionMS);
+        }
+
+
+        onVisible(document.querySelector(".profile"), () =>
+
+            fetch('/get_points')
+                .then(response => response.json())
+                .then(console.log(response))
+                .then(data => {
+                    countInin(JSON.stringify(data));
+                })
+
+
+
+        );
+
+
+
+        function countInin(num) {
+            let startNum = 0,
+                endNum = num,
+                nSecond = 2,
+                resolutionMS = 33,
+                deltaNum = (endNum - startNum) / (1000 / resolutionMS) / nSecond;
+            if (num === 0) {
+                document.querySelector('.profilepoints').textContent = 0;
+            }
+            var handle = setInterval(() => {
+
+                var x = startNum.toLocaleString(undefined, {
+                    minimumFractionDigits: 0,
+                    maximumFractionDigits: 0
+                });
+                document.querySelector('.profilepoints').textContent = `${x} points`;
+
+                // if already updated the endNum, stop
+                if (startNum >= endNum) clearInterval(handle);
+
+                startNum += deltaNum;
+                startNum = Math.min(startNum, endNum);
+            }, resolutionMS);
+        }
+
+        
+        var radios = document.forms["formA"].elements["q"];
+        var isCorrect = document.getElementById('isCorrect')
+        var correct = document.getElementById(Correct_Ans)
+        for (var i = 0, max = radios.length; i < max; i++) {
+            radios[i].onclick = function () {
+                var ans = document.getElementById(this.value);
+                if (this.value == Correct_Ans) {
+
+
+                    document.querySelector('#question_divy').innerHTML = '<h1>Correct</h1>';
+                    setTimeout(() => location.reload(), 3000);
+
+
+
+                } else {
+
+                    document.querySelector('#question_divy').innerHTML = '<h1>Incorrect</h1>';
+
+                    setTimeout(() => location.reload(), 3000);
+                }
+
+
+            }
+        }
+        function login() {
+            var l = document.querySelector('#login')
+            var k = document.querySelector('#register')
+            if (l.style.display == "block" || k.style.display == 'block') {
+                l.style.display = 'none';
+                k.style.display = 'none'
+            }
+            else {
+                k.style.display = 'none';
+                l.style.display = 'block';
+            }
+
+        }
+        ;
+        function register() {
+            var l = document.querySelector('#login')
+            var k = document.querySelector('#register')
+
+            l.style.display = 'none';
+            k.style.display = 'block';
+        }
+        function reset() {
+            var l = document.querySelector('#login')
+            var k = document.querySelector('#register')
+            var r = document.querySelector('.reset')
+            l.style.display = 'none';
+            k.style.display = 'none';
+            r.style.display = 'block';
+        }
+        var isd = document.cookie
+        var dsd = isd.slice(-32)
+
+        function sign_up() {
+            const BASE_URL = '{{ request.scheme }}://{{ request.get_host }}/';
+
+            let sent_data = { 'register': true }
+            const API_URL = BASE_URL + "/newsletter_signup";
+
+            const request = new Request(
+                API_URL,
+                { headers: { 'X-CSRFToken': dsd, 'Content-Type': 'application/json' } }
+            );
+
+            window.location.reload();
+
+            return fetch(request, {
+                method: 'POST',
+                mode: 'same-origin',
+                body: JSON.stringify(sent_data)
+            })
+                .then(response => response.json())
+                .then(response => {
+                    data = response['time']; return data;
+                });
+        }
+        function sign_up_no_acc() {
+            const BASE_URL = '{{ request.scheme }}://{{ request.get_host }}/';
+
+            let sent_data = { 'email': document.querySelector('#noAccEmail').value }
+            const API_URL = BASE_URL + "/newsletter_signup";
+
+            const request = new Request(
+                API_URL,
+                { headers: { 'X-CSRFToken': dsd, 'Content-Type': 'application/json' } }
+            );
+
+            window.location.reload();
+
+            return fetch(request, {
+                method: 'POST',
+                mode: 'same-origin',
+                body: JSON.stringify(sent_data)
+            })
+                .then(response => response.json())
+                .then(response => {
+                    data = response['time']; return data;
+                })
+        }
+
+    </script>
+</body>
+</html>
