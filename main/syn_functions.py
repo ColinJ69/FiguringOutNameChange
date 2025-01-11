@@ -85,7 +85,7 @@ def get_air(x):
 	  ],
 	}
 
-	gyatt = requests.post('https://airquality.googleapis.com/v1/history:lookup?key=AIzaSyDxGsCeJRDMAgqfTVJBpnHpVQ-vE_7K1cI', json=params)
+	gyatt = requests.post('https://airquality.googleapis.com/v1/history:lookup?key=xxxxxxxxxxxxxxxxxxxxxxxxxxxx', json=params)
 	i = gyatt.json()
 	print(i, 'hi')
 
@@ -120,7 +120,7 @@ def get_coords(x):
     
 
     ex = urllib.parse.quote_plus(x)
-    req = requests.post(f'https://maps.googleapis.com/maps/api/geocode/json?address={ex}&key=AIzaSyDxGsCeJRDMAgqfTVJBpnHpVQ-vE_7K1cI')
+    req = requests.post(f'https://maps.googleapis.com/maps/api/geocode/json?address={ex}&keyxxxxxxxxxxxxxxxxxxxxxxx
     resp = req.json()
 
 
