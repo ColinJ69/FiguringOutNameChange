@@ -5,6 +5,7 @@ Website to help other North Carolinians become more aware of the quality of thei
 Project built with: Javascript; Django; Sqlite; Pytorch; Pandas; Html; Css
 
 Features: 
+
   .Homepage;
 
   .Guides page on the basics of water pollution and how to help mitigate it near you;
