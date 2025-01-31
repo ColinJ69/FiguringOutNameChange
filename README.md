@@ -12,7 +12,7 @@ Features:
   
   .Games page, which users can test their knowledge on water quality issues;
   
-  .Interactive maps page, featuring maps made using leaflet, as well a tool to test if you're private well is likely polluted with PFAS; 
+  .Interactive maps page, featuring maps made using leaflet, as well a tool to test if your private well is likely polluted with PFAS; 
   
   .Take action page, where users can participate in local conferences and contact their representatives;
   
