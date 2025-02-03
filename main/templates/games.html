@@ -1,0 +1,786 @@
+﻿<!DOCTYPE html>
+{% load static %}
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NC Water Watch</title>
+    <link id="sheet-theme" rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    {% load django_bootstrap5 %}
+    {% bootstrap_css %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0-11/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://unpkg.com/htmx.org@1.9.4" integrity="sha384-zUfuhFKKZCbHTY6aRR46gxiqszMk5tcHjsVFxnUo8VMus4kHGVdIYVbOYYNlKmHV" crossorigin="anonymous"></script>
+    <style>
+        #menu li {
+            color: white;
+            margin-top: 10px;
+        }
+
+            #menu li:hover {
+                color: #FF8C00;
+                font-size: 20px;
+            }
+
+        body, html {
+            height: 110%;
+        }
+
+        a {
+            color: white;
+        }
+
+            a:hover {
+                color: white;
+            }
+
+        ul {
+            list-style-type: none;
+        }
+
+        input::placeholder {
+            opacity: 0.5;
+            color: black;
+        }
+
+        #formA input:hover {
+            cursor: pointer;
+        }
+
+        .footer a {
+            color: black;
+        }
+
+        #formA li {
+            list-style-type: none;
+        }
+        body, html{
+            height:100%;
+            margin:0;
+            width:100%;
+        }
+    </style>
+</head>
+
+<body style="background: #E8E8E8 ">
+
+    <nav role="navigation">
+
+        <div id="menuToggle">
+
+            <input type="checkbox" style="z-index: 4 " />
+
+
+            <span style="background: #ffffff; z-index: 3 "></span>
+            <span style="background: #ffffff; z-index: 3 "></span>
+            <span style="background: #ffffff; z-index: 3"></span>
+
+
+            <ul id="menu" style="background: #2F2F2F; color:white;">
+                <a href="/">
+                <li>Home</li></a>
+                <a href="guides">
+                <li>Guides</li></a>
+                <a href="maps">
+                <li>Maps</li></a>
+                <a href="games">
+                <li>Quizzes</li></a>
+                <a href="action">
+                <li>Take action</li></a>
+                <a href="news">
+                <li>News</li></a>
+                <li style="color:darkorange">
+                    <a style="position: relative; bottom: 0%;color:darkorange;" href="{% url 'logouts' %}">
+                        <h5>Logout</h5>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        
+    </nav>
+        
+
+    
+    <div style="height: 30%; width: 100%; position: relative; ">
+        
+        <div style="" id="quizbanner">
+            <h3 id="qtitle" style="display:none;"><b>Hydro Haven</b></h3>
+            <div style="" onclick="openLeaderboard()"><button class="qbBtn qbBtnRedeem" style="display: flex; justify-content: center">Redeem</button></div>
+            <div style="" onclick="openLeaderboard()"><button class="qbBtn qbBtnLeaderboard" style="display: flex; justify-content: center ">Leaderboard</button></div>
+            <div style="" onclick="openLeaderboard()"><button class="qbBtn qbBtnDefault" style="display:flex;justify-content: center">Games</button></div>
+            <svg xmlns="http://www.w3.org/2000/svg" onclick="openMenus()" width="45" height="45" fill="currentColor" class="bi bi-arrow-down-circle" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8.5 4.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293z" />
+            </svg>
+            <span id="quizMenu-opened">
+                <ul>
+                    <li onclick="openQuizzes()">
+                        Quizzes
+                    </li>
+                    <hr style="border: 1px solid #86bbd8; opacity: 1;"/>
+                    <li onclick="openLeaderboard()">
+                        Leaderboard
+                    </li>
+                    <hr style="border: 1px solid #86bbd8; opacity: 1;"/>
+                    <li onclick="openRedeem()">
+                        Redeem
+                    </li>
+                </ul>
+            </span>
+        </div>
+    </div>
+    <div style="position:relative;width:100%;height:100%;display:flex;flex-wrap:wrap;">
+        <div style="" id="divinquestion">
+            <div style="" id="quizdiv">
+                {% if request.user.is_authenticated %}
+                <h4 id="pointss" style="">
+
+                    {{points}} points
+
+                </h4>
+                {% else %}
+                <h4 id="pointss" onclick="logins()"><a href="logins">Login to gain points</a></h4>
+                {% endif %}
+                <div id="question_div" style="position: relative; ">
+
+                    <h2 class="question" style="position: relative;"></h2>
+                    <hr style="background:white;border:2px solid white;" />
+                    <form id="formA">
+                        <ol style="font-size: 25px; float: left" id="formAol">
+                            <li class="labelq"><input value="1" name="q" type="radio" id="input1"><label for="input1" id="1"></label></li>
+                            <li class="labelq"><input value="2" name="q" type="radio" id="input2" /><label for="input2" id="2"></label></li>
+                            <li class="labelq"><input value="3" name="q" type="radio" id="input3" /><label for="input3" id="3"></label></li>
+                            <li class="labelq"><input value="4" name="q" type="radio" id="input4" /><label for="input4" id="4"></label></li>
+                        </ol>
+
+                    </form>
+                    <div id="explanation">
+                        <p class="explaintext"></p>
+                    </div>
+                </div>
+                <p id="countdownnum"></p>
+            </div>
+            <div id="leaderboarddiv">
+                <div id="leaderboards">
+
+                    <h2  id="leadertitle">
+                        🏆Leaderboard🏆
+                    </h2><hr style="border:3px solid white;"/>
+                    {% for name, score, rank in top_scores %}
+                    <div class="leaderboard-item">
+                        <div class="rank">
+                            {{rank}}
+                        </div>
+                        <div class="name">
+                            {{name}}
+                        </div>
+                        <div class="score">
+                            {{score}}
+                        </div>
+                    </div>
+                    {% endfor %}
+
+
+                </div>
+            </div>
+            <div id="redeemdiv">
+                <div id="store">
+                    <span style="width: 100%; height: 35%; float: left;position:relative; text-align:center;" id="stortext">
+                        <p style="">Give with Hydro Haven</p><div class="charinfoicon">i</div>
+                        <div class="charinfo">
+                            <p style="position:absolute;top:0;right:0;font-size:0.75rem;">Resets in 7 days⏱️</p>
+                            <p style="font-size:1.25rem;">December's non-profit</p>
+                            <hr style="background-color:black;border:2px solid black;" />
+                            <p style="font-size:0.9rem;">Feeding America | They vouch that every person in America should not go to bed hungry</p>
+                        </div>
+                        <p id="message">Redeem 1,000 points<br /> ↓ <br />$1 towards charitable environmental causes</p>
+                        <hr style="border:2px solid black;"/>
+                    </span>
+                    <span id="don">
+                        <button style="" id="don-button-click" onclick="donate()">Donate(-1,000)</button>
+
+
+
+                    </span>
+                    <span id="donNum">
+                        <p style="" class="margin-gone-fet">Lifetime amount donated</p>
+                        <hr style="border:2px solid black;position:relative;opacity:1;" />
+                        <div id="donamm">
+                            <p>
+                                {% if request.user.is_authenticated %}
+                                ${{dollars}}
+                                {% else %}
+                                $0
+                                {% endif %}
+                            </p>
+                        </div>
+                    </span>
+                </div>
+            </div>
+           
+        </div>
+    </div>
+    <footer class="footer" style="display:block;position:relative;margin-top:10%;">
+        <span id="contactlinks">
+            <ul>
+                <li>
+                    <p><a href="about">About us</a></p>
+                </li>
+                <li>
+                    <p><a href="mailto:hydrohavennc@gmail.com">Email us</a></p>
+                </li>
+                <li>
+                    <p><a onclick="privacy()">Privacy policy</a></p>
+                </li>
+            </ul>
+        </span>
+        <div style="position:relative;height:100%;float:left;" id="footersubscribediv">
+            {% if logged_in %}
+
+            {% if signed_up %}
+            <div id="unsubscribe" style="">
+                <p style="font-size: 1.25rem; position: relative; float: left;" onclick="unsub()">Unsubscribe </p><a class="x2" onclick="unsub()"></a>
+            </div>
+            {% else %}
+            <div id="subscribe" style="">
+                <p>Sign up for our bi-weekly newsletter in one click!</p>
+                <hr style="font-size:2rem; background-color:grey;" />
+                <button style="border: 1px solid black; width: 86%; border-radius: 3px; border-color: grey" onclick="sign_up()">Sign up</button>
+            </div>
+            {% endif %}
+
+            {% else %}
+            <div id="subscribe" style="">
+
+                <p>Sign up for our bi-weekly newsletter!</p>
+                <hr style="font-size:2rem; background-color:grey;" />
+                <input name="noAccEmail" id="noAccEmail" type="text" placeholder="email" style="width:86%;">
+                <button style="border:1px solid black;width:86%;border-color:grey;border-radius:3px;" onclick="sign_up_no_acc()">Sign up</button>
+
+            </div>
+            {% endif %}
+        </div>
+        <div>
+            <img style="margin-left:55%;margin-top:-10%;height:200%;width:60%;" src="https://github.com/ColinJ69/NC-Water-Watch/raw/main/images/HydroHaven.svg" />
+            <p style="margin-top:-5%;margin-left:76%;">
+                ©Hydro Haven 2024
+            </p>
+        </div>
+
+    </footer>
+    
+    <script>
+        var quiz = document.querySelector('#quizdiv');
+        var leaderboard = document.querySelector('#leaderboarddiv');
+        var donate = document.querySelector('#redeemdiv');
+        function openMenus() {
+            var menu = document.querySelector('#quizMenu-opened');
+            var openMenuBtn = document.querySelector('.bi-arrow-down-circle');
+            
+            function pushaway() {
+                menu.style.display = 'none';
+            }
+            if (menu.style.display == 'block') {
+                openMenuBtn.classList.remove('spinonthatthang');
+                openMenuBtn.classList.add('spinbackonthatthang');
+                menu.classList.remove('floatInMenu-Quiz')
+                menu.classList.add('floatOutMenu-Quiz')
+                setTimeout(
+                    pushaway,
+                    300
+                )
+                
+            }
+            else {
+                openMenuBtn.classList.remove('spinbackonthatthang');
+                openMenuBtn.classList.add('spinonthatthang');
+                menu.classList.remove('floatOutMenu-Quiz')
+                menu.classList.add('floatInMenu-Quiz')
+                menu.style.display = 'block';
+            }
+            
+
+        }
+        function openQuizzes() {
+            
+            leaderboard.style.display = 'none';
+            donate.style.display = 'none';
+            quiz.style.display = 'block';
+        }
+        function openLeaderboard() {  
+            leaderboard.style.display = 'block';
+            donate.style.display = 'none';
+            quiz.style.display = 'none';
+
+            
+        }
+        function logins() {
+            window.location.href = 'http://127.0.0.1:8000/logins'
+        }
+        function openRedeem() { 
+            leaderboard.style.display = 'none';
+            donate.style.display = 'block';
+            quiz.style.display = 'none';
+        }
+        var q = document.querySelector('.question');
+        var ans1 = document.getElementById('1');
+        
+        var ans2 = document.getElementById('2');
+        var ans3 = document.getElementById('3');
+        var ans4 = document.getElementById('4');
+        var Correct_Ans;
+        class WeightedRandomPicker {
+            constructor(arr) {
+                this.arr = arr;
+                this.weights = new Array(arr.length).fill(1);
+            }
+
+            pick() {
+                const totalWeight = this.weights.reduce((acc, weight) => acc + weight, 0);
+                let random = Math.random() * totalWeight;
+
+                for (let i = 0; i < this.weights.length; i++) {
+                    if (random < this.weights[i]) {
+                        this.weights[i] *= 0.5;
+                        return this.arr[i];
+                    }
+                    random -= this.weights[i];
+                }
+            }
+        }
+
+        function getQuestions() {
+            const picked_question = new WeightedRandomPicker([0, 1, 2, 3, 4,5,6,7,8,9,10,11,12,13,14,15,16,17]);
+            var p = picked_question.pick();
+            
+            const cookie = document.cookie.slice(-32)
+            console.log(cookie)
+            const BASE_URL = '{{ request.scheme }}://{{ request.get_host }}/';
+            
+            let sent_data = { 'q': btoa(p) }
+            const API_URL = BASE_URL + "/stylesheet.css";
+
+            const request = new Request(
+                API_URL,
+                { headers: { 'X-CSRFToken': cookie, 'Content-Type': 'application/json' } }
+            );
+            
+            fetch(request, {
+                method: 'POST',
+                mode: 'same-origin',
+                body: JSON.stringify(sent_data)
+            })
+                
+                .then(response => response.json())
+    
+               
+                .then(questions => {
+                    
+                    var i = atob(questions)
+                    
+                    getQuestionInformation(i)
+
+                }
+                )}
+        function unsub() {
+            const BASE_URL = '{{ request.scheme }}://{{ request.get_host }}/';
+
+            let sent_data = { 'register': false }
+            const API_URL = BASE_URL + "/newsletter_signup";
+
+            const request = new Request(
+                API_URL,
+                { headers: { 'X-CSRFToken': dsd, 'Content-Type': 'application/json' } }
+            );
+
+            window.location.reload();
+
+            return fetch(request, {
+                method: 'POST',
+                mode: 'same-origin',
+                body: JSON.stringify(sent_data)
+            })
+                .then(response => response.json())
+                .then(response => {
+                    data = response['time']; return data;
+                })
+
+        }
+        function getQuestionInformation(questions) {
+            
+            function resetClasses() {
+                document.querySelector('#quizdiv').classList.remove('retractExplanationSmol')
+                document.querySelector('#quizdiv').classList.remove('retractExplanation')
+                document.querySelector('#quizdiv').classList.remove('retractExplanationMoreSmol')
+            }
+            setTimeout(
+                resetClasses,
+                1000
+            )
+            var question = JSON.parse(questions);
+            q.textContent = question['Question'];
+            ans1.textContent = question['Ans_Choices'][0];
+            console.log(ans1.innerText)
+            ans2.textContent = question['Ans_Choices'][1];
+            console.log(ans2.innerText)
+            ans3.textContent = question['Ans_Choices'][2];
+            console.log(ans3.innerText)
+            ans4.textContent = question['Ans_Choices'][3];
+            console.log(ans4.innerText)
+            Correct_Ans = question['Correct_Ans'];
+            ans1.style.color = 'black';
+            ans2.style.color = 'black';
+            ans3.style.color = 'black';
+            ans4.style.color = 'black';
+            var radios = document.forms["formA"].elements["q"];
+            radios.forEach(function (radio) {
+                radio.disabled = false;
+            });
+        }
+
+
+        document.addEventListener('DOMContentLoaded', function () {
+            window.addEventListener('load', function () {
+                getQuestions();
+
+            });
+        });
+
+
+        function correctExplanation() {
+            console.log('correct')
+            try {
+                
+                document.querySelector('#explanation').style.display = 'block';
+                document.querySelector('.explaintext').classList.add('typing-effect');
+                const text = localStorage.getItem('correct_explanation');
+
+                const typewriterElement = document.querySelector('.explaintext');
+                typewriterElement.textContent = '';
+                let index = 0;
+                function type() {
+                    if (index < text.length) {
+                        typewriterElement.textContent += text.charAt(index);
+                        index++;
+                        setTimeout(type, 10);
+                    }
+                }
+                type();
+            }
+            catch {
+
+            }
+        }
+        function incorrectExplanation() {
+            try {
+               
+
+                document.querySelector('#explanation').style.display = 'block';
+                document.querySelector('.explaintext').classList.add('typing-effect');
+                const text = localStorage.getItem('incorrect_explanation');
+
+                const typewriterElement = document.querySelector('.explaintext');
+                typewriterElement.textContent = '';
+                let index = 0;
+                function type() {
+                    if (index < text.length) {
+                        typewriterElement.textContent += text.charAt(index);
+                        index++;
+                        setTimeout(type, 10);
+                    }
+                }
+                type();
+            }
+            catch {
+
+            }
+        }
+
+
+
+
+        var radios = document.forms["formA"].elements["q"];
+        
+       
+        var isCorrect = document.getElementById('isCorrect')
+        var correct = document.getElementById(Correct_Ans)
+        for (var i = 0, max = radios.length; i < max; i++) {
+            
+            radios[i].onclick = function () {
+                if (window.innerWidth <= 436) {
+                    document.querySelector('#quizdiv').classList.remove('retractExplanationMoreSmol')
+                    document.querySelector('#quizdiv').classList.add('expandExplanationMoreSmol')
+                }
+                else if (window.innerWidth >= 800) {
+                    console.log('yes')
+                    document.querySelector('#quizdiv').classList.remove('retractExplanation')
+                    document.querySelector('#quizdiv').classList.add('expandExplanation')
+                }
+                else if (window.innerWidth < 800) {
+                    console.log('no')
+                    document.querySelector('#quizdiv').classList.remove('retractExplanationSmol')
+                    document.querySelector('#quizdiv').classList.add('expandExplanationSmol')
+                }
+                radios.forEach(function (radio) {
+                    radio.disabled = true;
+                });
+                var ans = document.getElementById(this.value);
+                if (this.value == Correct_Ans) {
+
+
+                    ans.style.color = 'green';
+                    document.getElementById(this.value).textContent = 'Correct!';
+                    
+                    submitFormData();
+                    countdown();
+                    correctExplanation();
+                    setTimeout(resetButtons, 7000);
+                    
+                    try {
+                        var npoints = document.querySelector('#pointss').textContent
+                        if (npoints !== 'Login to gain points') {
+
+
+                            var points = Number(npoints.replace(/\D/g, ''));
+                            document.querySelector('#pointss').textContent = `${points + 10} points`
+
+                            document.getElementById('points').value = Number(document.getElementById('points').value.trim()) + 10
+
+                            if (document.getElementById('points').value == 'NaN') {
+
+
+                                document.getElementById('points').value = 10;
+
+                            }
+                        }
+                    }
+                    finally {
+
+                    }
+
+
+
+                } else {
+
+                    ans.style.color = '#e44444';
+                    document.getElementById(this.value).textContent = 'Incorrect';
+                    countdown();
+                    incorrectExplanation();
+                    setTimeout(resetButtons, 7000);
+                    
+                }
+
+
+            }
+        }
+        function reset() {
+            window.location.reload();
+        }
+       
+
+        var isd = document.cookie
+        var csrftoken = isd.slice(-32)
+
+
+        function submitFormData() {
+            const BASE_URL = '{{ request.scheme }}://{{ request.get_host }}/';
+            
+            let sent_data = { 'points': 10 }
+            const API_URL = BASE_URL + "/add_points";
+
+            const request = new Request(
+                API_URL,
+                { headers: { 'X-CSRFToken': csrftoken, 'Content-Type': 'application/json' } }
+            );
+
+            return fetch(request, {
+                method: 'POST',
+                mode: 'same-origin',
+                body: JSON.stringify(sent_data)
+            })
+                .then(response => response.json())
+                .then(response => {
+                    data = response['time']; return data;
+                });
+        
+        }
+        function removeCover() {
+            if (window.innerWidth <= 436) {
+                document.querySelector('#quizdiv').classList.add('retractExplanationMoreSmol')
+                document.querySelector('#quizdiv').classList.remove('expandExplanationMoreSmol')
+            }
+            else if (window.innerWidth > 800) {
+                
+                document.querySelector('#quizdiv').classList.add('retractExplanation');
+                document.querySelector('#quizdiv').classList.remove('expandExplanation');
+            }
+            else if (window.innerWidth <= 800) {
+                document.querySelector('#quizdiv').classList.add('retractExplanationSmol')
+                document.querySelector('#quizdiv').classList.remove('expandExplanationSmol')
+            }
+        }
+        function resetButtons() {
+            
+            document.getElementById('countdownnum').style.display = 'none';
+            
+            document.querySelector('#explanation').style.display = 'none';
+            removeCover();
+            getQuestions();
+            
+        }
+            
+        
+        
+
+        function countdown() {
+            try {
+                let count = 7;
+
+                const countdownElement = document.getElementById('countdownnum');
+                countdownElement.style.display = 'block';
+
+                const countdown = setInterval(() => {
+                    count--; countdownElement.textContent = count + 's';
+                    console.log(count)
+                    if (count === 0) {
+                        clearInterval(countdown);
+
+                    }
+                }, 1000);
+            }
+            catch {
+                
+            }
+        }
+
+        function donate() {
+            try {
+                var npoints = document.querySelector('#pointss').textContent
+                var points = Number(npoints.replace(/\D/g, ''));
+
+
+                if (points > 999) {
+
+                    document.querySelector('#pointss').textContent = `${points - 1000} points`
+                    document.querySelector('#message').textContent = 'Success'
+                    const BASE_URL = '{{ request.scheme }}://{{ request.get_host }}/';
+
+
+                   
+                        
+                    
+                    let sent_data = JSON.stringify({ 'points': 10 })
+                    const API_URL = BASE_URL + "donate";
+
+                    const request = new Request(
+                        API_URL,
+                        {
+                            headers: {
+                                'X-CSRFToken': dsd,
+                                'Content-Type': 'application/json'
+                            }
+                        }
+
+                    );
+
+                    return fetch(request, {
+                        method: 'POST',
+                        mode: 'same-origin',
+                        body: sent_data
+                    })
+                        .then(response => response.json())
+
+                        .then(data => syn(data))
+                        .catch(error => console.error('Error:', error));
+                
+                }
+                else {
+                        document.querySelector('#message').textContent = 'Insufficient Points!'
+                    }
+                }
+            catch {
+                    document.querySelector('#message').textContent = 'Log in to donate'
+                }
+            
+        }
+        function syn(data) { 
+            
+            
+            if (data.status == 'Good') {
+                document.querySelector('#message').textContent = "Success"
+                setTimeout(() => {
+                    window.location.reload();
+                }, 3000);
+            }
+            else if (data.status == 'Bad') {
+                
+                document.querySelector('#message').innerHTML = "You're not smart :/"
+                setTimeout(() => {
+                    window.location.reload();
+                }, 3000);
+            }
+            else if (data.status == 'nameError') {
+
+                document.querySelector('#message').innerHTML = "<a href='logins' style='color:black'>Login here to start earning points</a> "
+                setTimeout(() => {
+                    window.location.reload();
+                }, 3000);
+            }
+        }
+        var isd = document.cookie
+        var dsd = isd.slice(-32)
+        function cover() {
+            var div = document.getElementById('formA');
+            
+        }
+        function sign_up() {
+            const BASE_URL = '{{ request.scheme }}://{{ request.get_host }}/';
+
+            let sent_data = { 'register': true }
+            const API_URL = BASE_URL + "/newsletter_signup";
+
+            const request = new Request(
+                API_URL,
+                { headers: { 'X-CSRFToken': dsd, 'Content-Type': 'application/json' } }
+            );
+
+            window.location.reload();
+
+            return fetch(request, {
+                method: 'POST',
+                mode: 'same-origin',
+                body: JSON.stringify(sent_data)
+            })
+                .then(response => response.json())
+                .then(response => {
+                    data = response['time']; return data;
+                });
+        }
+        function sign_up_no_acc() {
+            const BASE_URL = '{{ request.scheme }}://{{ request.get_host }}/';
+
+            let sent_data = { 'email': document.querySelector('#noAccEmail').value }
+            const API_URL = BASE_URL + "/newsletter_signup";
+
+            const request = new Request(
+                API_URL,
+                { headers: { 'X-CSRFToken': dsd, 'Content-Type': 'application/json' } }
+            );
+
+            window.location.reload();
+
+            return fetch(request, {
+                method: 'POST',
+                mode: 'same-origin',
+                body: JSON.stringify(sent_data)
+            })
+                .then(response => response.json())
+                .then(response => {
+                    data = response['time']; return data;
+                })
+        }
+    </script>
+</body>
+</html>
